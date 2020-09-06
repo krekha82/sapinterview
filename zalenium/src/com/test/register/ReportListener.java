@@ -1,12 +1,20 @@
 package com.test.register;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+import org.testng.annotations.BeforeMethod;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
@@ -16,7 +24,15 @@ public class ReportListener implements ITestListener {
 	protected static WebDriver driver;
 	protected static ExtentReports reports;
 	protected static ExtentTest test;
-
+	protected DesiredCapabilities dc;
+@BeforeMethod
+	   public void beforeTest() throws MalformedURLException {
+	    dc = new DesiredCapabilities();
+	    dc.setCapability(CapabilityType.BROWSER_NAME,BrowserType.CHROME);
+	    driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), dc);
+		//driver = new ChromeDriver(); 	
+	     driver.get("https://cai.tools.sap");	   
+	   }
 	public void onTestStart(ITestResult result) {
 		System.out.println("on test start");
 		test = reports.startTest(result.getMethod().getMethodName());

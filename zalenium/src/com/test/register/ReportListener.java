@@ -30,7 +30,7 @@ public class ReportListener implements ITestListener {
 	    dc = new DesiredCapabilities();
 	    dc.setCapability(CapabilityType.BROWSER_NAME,BrowserType.CHROME);
 	    driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), dc);
-		//driver = new ChromeDriver(); 	
+		// driver = new ChromeDriver(); 	
 	     driver.get("https://cai.tools.sap");	   
 	   }
 	public void onTestStart(ITestResult result) {
